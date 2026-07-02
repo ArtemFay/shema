@@ -1,0 +1,13 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Страница-1" id="r35PIizqd_x3shYIriQy">
+    <mxGraphModel dx="1236" dy="754" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="chatgpt-public-shema-test-20260702" value="AI cabinet&#xa;Uploaded to public GitHub repo&#xa;2026-07-02" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="260" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
