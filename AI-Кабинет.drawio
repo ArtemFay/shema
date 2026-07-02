@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="ChatGPT">
   <diagram name="AI-кабинет — память клиента" id="ai-cabinet-memory-workflow">
-    <mxGraphModel dx="3914" dy="633" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1300" math="0" shadow="0">
+    <mxGraphModel dx="4685" dy="918" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -34,7 +34,7 @@
         <mxCell id="Tc8escb-BXCXqptsqmxu-10" edge="1" parent="1" source="source_docs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;" target="source_raw">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="source_docs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=14" value="Документы/Чаты" vertex="1">
+        <mxCell id="source_docs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=14" value="Документы/Чаты/Письма" vertex="1">
           <mxGeometry height="70" width="200" x="-100" y="450" as="geometry" />
         </mxCell>
         <mxCell id="Tc8escb-BXCXqptsqmxu-11" edge="1" parent="1" source="source_raw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="prep_original">
@@ -43,16 +43,13 @@
         <mxCell id="source_raw" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1" value="Raw source сохраняется&#xa;без потери первоисточника" vertex="1">
           <mxGeometry height="75" width="150" x="150" y="215" as="geometry" />
         </mxCell>
-        <mxCell id="prep_original" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Оригинал сессии&lt;br&gt;Размещение в хранилище, присвоение source_id + timestamps&lt;/font&gt;" vertex="1">
-          <mxGeometry height="70" width="200" x="410" y="217.5" as="geometry" />
-        </mxCell>
-        <mxCell id="prep_fragment" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14;fontStyle=1" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Фрагментация&lt;br&gt;[0001]–[9999]&lt;/span&gt;" vertex="1">
+        <mxCell id="prep_fragment" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14;fontStyle=1" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Техническая Фрагментация&lt;br&gt;[0001]–[9999]&lt;br&gt;Разбивка на сегменты по объему символов для передачи в LLM&lt;/font&gt;&lt;/span&gt;" vertex="1">
           <mxGeometry height="70" width="200" x="410" y="315" as="geometry" />
         </mxCell>
-        <mxCell id="prep_clean" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14" value="Первичная санитарная очистка&#xa;ASR, пунктуация, роли" vertex="1">
+        <mxCell id="prep_clean" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Первичная LLM&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;font-size: 10px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;очистка&lt;/span&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;ASR, пунктуация, роли&lt;/font&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="80" width="200" x="410" y="410" as="geometry" />
         </mxCell>
-        <mxCell id="prep_assembly" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14" value="Сборка реплик / смысловых отрезков&#xa;source_fragment_ids сохраняются" vertex="1">
+        <mxCell id="prep_assembly" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Сборка реплик / смысловых отрезков&lt;br&gt;source_fragment_ids сохраняются&lt;/font&gt;" vertex="1">
           <mxGeometry height="90" width="200" x="410" y="520" as="geometry" />
         </mxCell>
         <mxCell id="zone_extract" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=12" value="3. Извлечение памяти" vertex="1">
@@ -214,6 +211,9 @@
         </mxCell>
         <mxCell id="Tc8escb-BXCXqptsqmxu-8" edge="1" parent="1" source="source_notes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.004;entryY=0.463;entryDx=0;entryDy=0;entryPerimeter=0;curved=1;" target="source_raw">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prep_original" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14;align=left;" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Сохраняем оригинал сессии&lt;br&gt;- Размещение в хранилище, &lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- присвоение &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;source_id + &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;timestamps&lt;/span&gt;&lt;/div&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="200" x="410" y="217.5" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
