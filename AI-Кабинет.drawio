@@ -1,322 +1,94 @@
 <mxfile host="app.diagrams.net" agent="ChatGPT" pages="2">
   <diagram name="AI-кабинет — память клиента" id="ai-cabinet-memory-workflow">
-    <mxGraphModel dx="3313" dy="1224" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3200" pageHeight="1600" math="0" shadow="0">
+    <mxGraphModel dx="2600" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2600" pageHeight="1400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;fontStyle=1" value="AI-кабинет: схема профессиональной памяти клиента" vertex="1">
-          <mxGeometry height="50" width="1480" x="560" y="20" as="geometry" />
+
+        <mxCell id="title" value="AI-кабинет: схема профессиональной памяти клиента" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=28;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="420" y="30" width="1760" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="subtitle" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;align=center;verticalAlign=middle" value="MVP: текстовый поток после сессии. ИИ предлагает обновления памяти, но не меняет память молча." vertex="1">
-          <mxGeometry height="50" width="1080" x="760" y="75" as="geometry" />
+        <mxCell id="subtitle" value="Главный принцип: память — не summary, а доказательная картотека кейса. Каждый вывод связан с исходным фрагментом." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;align=center" vertex="1" parent="1">
+          <mxGeometry x="470" y="90" width="1660" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="zone_input" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=12" value="1. Источники данных" vertex="1">
-          <mxGeometry height="520" width="300" x="40" y="150" as="geometry" />
+
+        <mxCell id="phase_1" value="1. Источник" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="70" y="190" width="230" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="source_notes" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=14" value="Заметки специалиста&#xa;после сессии" vertex="1">
-          <mxGeometry height="70" width="200" x="90" y="220" as="geometry" />
-        </mxCell>
-        <mxCell id="source_transcript" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=14" value="Транскрипт сессии&#xa;психолог / клиент" vertex="1">
-          <mxGeometry height="70" width="200" x="90" y="315" as="geometry" />
-        </mxCell>
-        <mxCell id="source_forms" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=14" value="Анкеты, формы,&#xa;домашние задания" vertex="1">
-          <mxGeometry height="70" width="200" x="90" y="410" as="geometry" />
-        </mxCell>
-        <mxCell id="source_docs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=14" value="Документы / Чаты / Письма" vertex="1">
-          <mxGeometry height="70" width="200" x="90" y="505" as="geometry" />
-        </mxCell>
-        <mxCell id="source_raw" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1" value="Raw source сохраняется&#xa;без потери первоисточника" vertex="1">
-          <mxGeometry height="50" width="200" x="90" y="600" as="geometry" />
-        </mxCell>
-        <mxCell id="zone_prepare" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=12" value="2. Подготовка текста" vertex="1">
-          <mxGeometry height="520" width="340" x="380" y="150" as="geometry" />
-        </mxCell>
-        <mxCell id="prep_original" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14" value="Оригинал сессии&#xa;source_id + timestamps" vertex="1">
-          <mxGeometry height="70" width="200" x="450" y="220" as="geometry" />
-        </mxCell>
-        <UserObject label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;raw fragments [0001]–[9999]&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;speaker / timestamp / blank line / hard limit&lt;/font&gt;" tooltip="Скриптовая фрагментация:&#xa;детерминированная raw-нарезка. Скрипт не понимает смысл и не чистит текст. Новый fragment создается при смене speaker, новом timestamp-блоке, пустой строке между абзацами при отсутствии speaker labels или при превышении hard limit. Одинарный перенос строки не является новой границей. Выход: fragment_id, raw_text, speaker, char range, line range, timestamps." mode="tooltip" owner="script" layer="raw" boundary_rules="speaker_change|timestamp_block|blank_line_without_speaker|hard_limit" do_not_do="no semantic grouping; no rewriting; no deletion" output_fields="fragment_id; raw_text; speaker; char_start; char_end; line_start; line_end; timestamp_start; timestamp_end" id="prep_fragment">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14;fontStyle=1" vertex="1">
-            <mxGeometry height="88" width="200" x="450" y="315" as="geometry" />
+        <UserObject id="phase_2" label="&lt;b&gt;2. Скриптовая&lt;br&gt;фрагментация&lt;/b&gt;" tooltip="Детерминированная raw-нарезка скриптом. Не LLM. Скрипт не чистит и не интерпретирует смысл. Новый fragment создается при смене speaker, timestamp-блоке, пустой строке между абзацами без speaker labels или hard limit. Одинарный перенос строки не является границей. Выход: fragment_id, raw_text, speaker, char/line ranges, timestamps." owner="script" layer="raw" boundary_rules="speaker_change|timestamp_block|blank_line_without_speaker|hard_limit" one_newline_rule="keep_inside_fragment" hard_limit_chars="1200" target_chars="300-800" split_order="sentence; semicolon; comma; space; char" prohibited_actions="no_cleanup; no_semantic_grouping; no_rewrite; no_drop" output_fields="fragment_id; source_id; speaker; raw_text; char_start; char_end; line_start; line_end; timestamp_start; timestamp_end">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;fontStyle=1" vertex="1" parent="1">
+            <mxGeometry x="390" y="190" width="230" height="80" as="geometry" />
           </mxCell>
         </UserObject>
-        <mxCell id="prep_clean" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14" value="Первичная LLM-очистка&#xa;ASR, пунктуация, роли" vertex="1">
-          <mxGeometry height="80" width="200" x="450" y="430" as="geometry" />
+        <mxCell id="phase_3" value="3. LLM-очистка" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="710" y="190" width="230" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="prep_assembly" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14" value="Сборка реплик / смысловых отрезков&#xa;source_fragment_ids сохраняются" vertex="1">
-          <mxGeometry height="90" width="200" x="450" y="540" as="geometry" />
+        <mxCell id="phase_4" value="4. Извлечение памяти" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1030" y="190" width="230" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="zone_extract" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=12" value="3. Извлечение памяти" vertex="1">
-          <mxGeometry height="520" width="320" x="780" y="150" as="geometry" />
+        <mxCell id="phase_5" value="5. Проверка специалистом" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1350" y="190" width="230" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="extract_cards" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=14;fontStyle=1" value="Карточки смыслов&#xa;атомарные утверждения" vertex="1">
-          <mxGeometry height="70" width="200" x="840" y="220" as="geometry" />
+        <mxCell id="phase_6" value="6. Память клиента" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1670" y="190" width="230" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="extract_fact_hyp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=14" value="Разделение типов&#xa;факт / гипотеза / вопрос / задача" vertex="1">
-          <mxGeometry height="85" width="200" x="840" y="315" as="geometry" />
+        <mxCell id="phase_7" value="7. Recall / ответ ИИ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1990" y="190" width="230" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="extract_evidence" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=14" value="Evidence refs&#xa;ссылка на реплику и фрагменты" vertex="1">
-          <mxGeometry height="75" width="200" x="840" y="430" as="geometry" />
+
+        <mxCell id="d1" value="Транскрипт, заметки, анкеты, документы. Raw source сохраняется без потери первоисточника." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="50" y="330" width="270" height="150" as="geometry" /></mxCell>
+        <mxCell id="d2" value="Скрипт создает стабильные raw fragments [0001]–[9999]. Границы: speaker, timestamp, пустая строка без speaker labels, hard limit. Не чистит текст и не ищет смысл." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="370" y="330" width="270" height="150" as="geometry" /></mxCell>
+        <mxCell id="d3" value="LLM получает пакет raw fragments и делает санитарную очистку: ASR, пунктуация, роли, смысловая сборка. Обязана сохранять source_fragment_ids." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="690" y="330" width="270" height="150" as="geometry" /></mxCell>
+        <mxCell id="d4" value="Из чистых сегментов извлекаются карточки: факт, гипотеза, вопрос, задача, паттерн. Каждая карточка получает evidence refs." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="1010" y="330" width="270" height="150" as="geometry" /></mxCell>
+        <mxCell id="d5" value="ИИ предлагает изменения памяти. Специалист принимает, исправляет или отклоняет. Без утверждения память не меняется." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="1330" y="330" width="270" height="150" as="geometry" /></mxCell>
+        <mxCell id="d6" value="Хранилища: client case, sessions, semantic_items, revisions, evidence_refs, JSONB/FTS/pgvector indexes." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="1650" y="330" width="270" height="150" as="geometry" /></mxCell>
+        <mxCell id="d7" value="Перед новой сессией ИИ ищет релевантную память, собирает контекст и готовит рабочий ответ специалисту." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="1970" y="330" width="270" height="150" as="geometry" /></mxCell>
+
+        <mxCell id="doc_zone" value="Как хранить подробное описание блока внутри Draw.io" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#4f81bd;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=14" vertex="1" parent="1">
+          <mxGeometry x="370" y="570" width="1490" height="390" as="geometry" />
         </mxCell>
-        <mxCell id="extract_dedup" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=14" value="Дедупликация, уверенность,&#xa;версии карточек" vertex="1">
-          <mxGeometry height="75" width="200" x="840" y="535" as="geometry" />
-        </mxCell>
-        <mxCell id="zone_storage" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=12" value="4. Хранилища памяти" vertex="1">
-          <mxGeometry height="690" width="360" x="1160" y="150" as="geometry" />
-        </mxCell>
-        <mxCell id="store_client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=14;fontStyle=1" value="Карточка клиента / case&#xa;person, relationship, case formulation" vertex="1">
-          <mxGeometry height="75" width="220" x="1230" y="220" as="geometry" />
-        </mxCell>
-        <mxCell id="store_sessions" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=14" value="История сессий&#xa;sessions, utterances, summaries" vertex="1">
-          <mxGeometry height="75" width="220" x="1230" y="320" as="geometry" />
-        </mxCell>
-        <mxCell id="store_semantic" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=14;fontStyle=1" value="Semantic memory&#xa;semantic_items + revisions" vertex="1">
-          <mxGeometry height="75" width="220" x="1230" y="420" as="geometry" />
-        </mxCell>
-        <mxCell id="store_evidence" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=14" value="Доказательная база&#xa;evidence_refs до первоисточника" vertex="1">
-          <mxGeometry height="75" width="220" x="1230" y="520" as="geometry" />
-        </mxCell>
-        <mxCell id="store_index" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=14" value="Индексы поиска&#xa;JSONB + FTS + pgvector" vertex="1">
-          <mxGeometry height="75" width="220" x="1230" y="620" as="geometry" />
-        </mxCell>
-        <mxCell id="store_policy" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1" value="Правило безопасности&#xa;ИИ предлагает изменения,&#xa;специалист утверждает" vertex="1">
-          <mxGeometry height="85" width="220" x="1230" y="720" as="geometry" />
-        </mxCell>
-        <mxCell id="zone_retrieval" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=12" value="5. Поиск и подготовка ответа" vertex="1">
-          <mxGeometry height="520" width="330" x="1580" y="150" as="geometry" />
-        </mxCell>
-        <mxCell id="retrieval_query" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=14" value="Запрос специалиста&#xa;перед новой сессией" vertex="1">
-          <mxGeometry height="70" width="200" x="1645" y="220" as="geometry" />
-        </mxCell>
-        <mxCell id="retrieval_search" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=14;fontStyle=1" value="Recall / поиск памяти&#xa;семантика + фильтры + история" vertex="1">
-          <mxGeometry height="80" width="200" x="1645" y="320" as="geometry" />
-        </mxCell>
-        <mxCell id="retrieval_context" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=14" value="Сбор контекста&#xa;факты, гипотезы, риски, задачи" vertex="1">
-          <mxGeometry height="80" width="200" x="1645" y="430" as="geometry" />
-        </mxCell>
-        <mxCell id="retrieval_answer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=14;fontStyle=1" value="Ответ ИИ специалисту&#xa;подготовка к действию" vertex="1">
-          <mxGeometry height="80" width="200" x="1645" y="540" as="geometry" />
-        </mxCell>
-        <mxCell id="zone_fragment_docs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#4f81bd;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=12" value="8. Документация блока «Скриптовая фрагментация»" vertex="1">
-          <mxGeometry height="720" width="1130" x="1980" y="150" as="geometry" />
-        </mxCell>
-        <mxCell id="fragment_docs_caption" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;align=center" value="Ниже показаны 3 способа хранить подробное описание правил скриптовой фрагментации внутри draw.io: tooltip, metadata и отдельная страница схемы." vertex="1">
-          <mxGeometry height="50" width="990" x="2050" y="195" as="geometry" />
-        </mxCell>
-        <UserObject label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;Вариант A: Tooltip&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;краткая оперативная памятка при hover&lt;/font&gt;" tooltip="1) Скрипт не понимает смысл и не чистит текст. 2) Базовая единица — реплика говорящего. 3) Новый fragment: смена speaker, новый timestamp-блок, пустая строка между абзацами без speaker labels, превышение hard limit. 4) Одинарный перенос строки не создает новый fragment. 5) Длинная реплика режется по . ? ! ; , затем по пробелу перед лимитом. 6) Ничего не удалять и не переписывать. 7) Выход: fragment_id + координаты в исходнике." mode="tooltip" id="frag_tooltip_demo">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4f81bd;fontSize=14;fontStyle=1" vertex="1">
-            <mxGeometry height="100" width="280" x="2040" y="280" as="geometry" />
-          </mxCell>
+        <UserObject id="doc_tooltip" label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;A. Tooltip" tooltip="Короткая памятка: что делает скрипт, что не делает, где граница fragment, какие поля output обязательны." mode="tooltip">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4f81bd;fontSize=15;fontStyle=1" vertex="1" parent="1"><mxGeometry x="430" y="650" width="360" height="90" as="geometry" /></mxCell>
         </UserObject>
-        <mxCell id="frag_tooltip_note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#4f81bd;fontSize=13;align=left;spacing=8" value="Редактирование пояснения:&lt;br&gt;&lt;b&gt;Edit &gt; Edit Tooltip&lt;/b&gt; или &lt;b&gt;Alt+Shift+T&lt;/b&gt;.&lt;br&gt;Что хранить: краткие правила, которые нужно быстро увидеть при наведении.&lt;br&gt;Содержимое для нашего кейса: что делает скрипт, какие границы нового fragment, что делать нельзя, какой минимальный output ожидается." vertex="1">
-          <mxGeometry height="250" width="280" x="2040" y="400" as="geometry" />
-        </mxCell>
-        <UserObject label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;Вариант B: Metadata&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;структурированные свойства блока&lt;/font&gt;" owner="script" layer="raw" input_unit="replica_or_paragraph" new_fragment_when="speaker_change|timestamp|blank_line|hard_limit" one_newline_rule="keep_inside_fragment" hard_limit_chars="1200" target_chars="300-800" split_order="sentence; semicolon; comma; space; char" prohibited_actions="no_semantic_grouping; no_cleanup; no_rewrite; no_drop" output_fields="fragment_id; source_id; speaker; raw_text; char_start; char_end; line_start; line_end; timestamp_start; timestamp_end" id="frag_metadata_demo">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4f81bd;fontSize=14;fontStyle=1" vertex="1">
-            <mxGeometry height="100" width="280" x="2405" y="280" as="geometry" />
-          </mxCell>
+        <mxCell id="doc_tooltip_note" value="Для быстрого чтения при наведении. Сюда кладется короткое правило: скрипт режет raw-текст детерминированно, не чистит и не интерпретирует." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#4f81bd;fontSize=13;align=left;spacing=8" vertex="1" parent="1"><mxGeometry x="430" y="760" width="360" height="120" as="geometry" /></mxCell>
+
+        <UserObject id="doc_metadata" label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;B. Metadata" owner="script" layer="raw" boundary_rules="speaker|timestamp|blank_line|hard_limit" output="fragment_id;raw_text;coordinates" limits="target 300-800; hard 1200">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4f81bd;fontSize=15;fontStyle=1" vertex="1" parent="1"><mxGeometry x="930" y="650" width="360" height="90" as="geometry" /></mxCell>
         </UserObject>
-        <mxCell id="frag_metadata_note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#4f81bd;fontSize=13;align=left;spacing=8" value="Редактирование метаданных:&lt;br&gt;&lt;b&gt;Edit Data&lt;/b&gt; или &lt;b&gt;Ctrl+M / Cmd+M&lt;/b&gt;.&lt;br&gt;Что хранить: machine-readable свойства блока.&lt;br&gt;Для нашей задачи здесь должны лежать: boundary rules, лимиты длины, запреты, порядок split, поля output и тип слоя = raw.&lt;br&gt;Это удобно как формальная спецификация для скрипта." vertex="1">
-          <mxGeometry height="250" width="280" x="2405" y="400" as="geometry" />
-        </mxCell>
-        <UserObject label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;Вариант C: Отдельная страница схемы&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot;&gt;полный регламент и логика шага&lt;/font&gt;" tooltip="Подробный регламент вынесен на отдельную страницу: &#39;Скриптовая фрагментация — регламент&#39;. Там можно хранить полный текст правил, псевдо-алгоритм, проверки целостности и структуру output." mode="page" id="frag_page_demo">
-          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4f81bd;fontSize=14;fontStyle=1" vertex="1">
-            <mxGeometry height="100" width="280" x="2770" y="280" as="geometry" />
-          </mxCell>
+        <mxCell id="doc_metadata_note" value="Для формальной спецификации. Сюда кладутся machine-readable поля: boundary_rules, лимиты, запреты, output_fields, тип слоя raw." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#4f81bd;fontSize=13;align=left;spacing=8" vertex="1" parent="1"><mxGeometry x="930" y="760" width="360" height="120" as="geometry" /></mxCell>
+
+        <UserObject id="doc_page" label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;C. Отдельная страница" tooltip="Полный регламент вынесен на вторую страницу этой схемы: 'Скриптовая фрагментация — регламент'.">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4f81bd;fontSize=15;fontStyle=1" vertex="1" parent="1"><mxGeometry x="1430" y="650" width="360" height="90" as="geometry" /></mxCell>
         </UserObject>
-        <mxCell id="frag_page_note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#4f81bd;fontSize=13;align=left;spacing=8" value="Отдельная схема / страница:&lt;br&gt;лучший вариант для полного регламента.&lt;br&gt;Что хранить: определение этапа, что делает и не делает скрипт, правила начала нового fragment, правила split длинной реплики, формат output, контрольные проверки, примеры.&lt;br&gt;На странице 2 это уже развернуто." vertex="1">
-          <mxGeometry height="250" width="280" x="2770" y="400" as="geometry" />
-        </mxCell>
-        <mxCell id="fragment_summary_note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;align=left;spacing=8" value="Рекомендуемая практика: основной рабочий блок хранит и tooltip, и metadata. А отдельная страница схемы хранит полный регламент. Тогда внутри draw.io есть и быстрый просмотр, и формальная спецификация, и полноценная документация." vertex="1">
-          <mxGeometry height="110" width="810" x="2140" y="690" as="geometry" />
-        </mxCell>
-        <mxCell id="zone_human" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=12" value="6. Контроль специалиста" vertex="1">
-          <mxGeometry height="310" width="680" x="380" y="740" as="geometry" />
-        </mxCell>
-        <mxCell id="human_report" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=14" value="Короткий рабочий отчёт&#xa;что изменилось, гипотезы, вопросы" vertex="1">
-          <mxGeometry height="80" width="210" x="430" y="810" as="geometry" />
-        </mxCell>
-        <mxCell id="human_review" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1" value="Проверка специалистом&#xa;принять / исправить / отклонить" vertex="1">
-          <mxGeometry height="120" width="160" x="710" y="790" as="geometry" />
-        </mxCell>
-        <mxCell id="human_commit" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1" value="Утверждённые обновления&#xa;попадают в память" vertex="1">
-          <mxGeometry height="80" width="110" x="920" y="810" as="geometry" />
-        </mxCell>
-        <mxCell id="human_reject" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14" value="Отклонённые предложения&#xa;не меняют память" vertex="1">
-          <mxGeometry height="70" width="180" x="710" y="940" as="geometry" />
-        </mxCell>
-        <mxCell id="zone_standards" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6d0de;strokeColor=#996185;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=12" value="7. Профессиональная рамка" vertex="1">
-          <mxGeometry height="150" width="750" x="1160" y="900" as="geometry" />
-        </mxCell>
-        <mxCell id="standard_soap" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#996185;fontSize=14" value="SOAP / case formulation / 5P&#xa;не изобретать онтологию с нуля" vertex="1">
-          <mxGeometry height="65" width="220" x="1205" y="960" as="geometry" />
-        </mxCell>
-        <mxCell id="standard_multi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#996185;fontSize=14" value="RU / EN с начала&#xa;мультиязычные карточки и поиск" vertex="1">
-          <mxGeometry height="65" width="200" x="1465" y="960" as="geometry" />
-        </mxCell>
-        <mxCell id="standard_roles" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#996185;fontSize=14" value="AI-архивариус + AI-эксперт&#xa;архивирует, ищет, объясняет" vertex="1">
-          <mxGeometry height="65" width="170" x="1705" y="960" as="geometry" />
-        </mxCell>
-        <mxCell id="note_bottom" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=15;fontStyle=1;align=center" value="Ключевая идея: память — не summary, а доказательная картотека кейса. Каждая карточка имеет тип, уверенность, версию и ссылку на первоисточник." vertex="1">
-          <mxGeometry height="70" width="1360" x="520" y="1120" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_notes_raw" edge="1" parent="1" source="source_notes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#b85450;" target="source_raw" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_transcript_raw" edge="1" parent="1" source="source_transcript" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#b85450;" target="source_raw" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_forms_raw" edge="1" parent="1" source="source_forms" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#b85450;" target="source_raw" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_docs_raw" edge="1" parent="1" source="source_docs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#b85450;" target="source_raw" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_source_raw" edge="1" parent="1" source="source_raw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;" target="prep_original" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_prep1" edge="1" parent="1" source="prep_original" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6c8ebf;" target="prep_fragment" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_prep2" edge="1" parent="1" source="prep_fragment" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6c8ebf;" target="prep_clean" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_prep3" edge="1" parent="1" source="prep_clean" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#6c8ebf;" target="prep_assembly" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_to_extract" edge="1" parent="1" source="prep_assembly" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#82b366;" target="extract_cards" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_extract1" edge="1" parent="1" source="extract_cards" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#82b366;" target="extract_fact_hyp" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_extract2" edge="1" parent="1" source="extract_fact_hyp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#82b366;" target="extract_evidence" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_extract3" edge="1" parent="1" source="extract_evidence" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#82b366;" target="extract_dedup" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_to_store" edge="1" parent="1" source="extract_dedup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#9673a6;fontSize=12;" target="store_policy" value="proposed memory updates">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_human_report" edge="1" parent="1" source="extract_dedup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;" target="human_report" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_report_review" edge="1" parent="1" source="human_report" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;" target="human_review" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_review_commit" edge="1" parent="1" source="human_review" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#82b366;fontSize=12;" target="human_commit" value="принять">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_review_reject" edge="1" parent="1" source="human_review" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#b85450;fontSize=12;" target="human_reject" value="отклонить">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_commit_store" edge="1" parent="1" source="human_commit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#9673a6;fontSize=12;" target="store_semantic" value="запись версии">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_store_client" edge="1" parent="1" source="store_semantic" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#9673a6;" target="store_client" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_store_sessions" edge="1" parent="1" source="store_sessions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#9673a6;" target="store_semantic" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_store_evidence" edge="1" parent="1" source="store_semantic" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#9673a6;fontSize=12;" target="store_evidence" value="traceability">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_store_index" edge="1" parent="1" source="store_semantic" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#9673a6;fontSize=12;" target="store_index" value="индексация">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_query_search" edge="1" parent="1" source="retrieval_query" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#d6b656;" target="retrieval_search" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_search_context" edge="1" parent="1" source="retrieval_search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#d6b656;" target="retrieval_context" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_context_answer" edge="1" parent="1" source="retrieval_context" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#d6b656;" target="retrieval_answer" value="">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_index_search" edge="1" parent="1" source="store_index" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#d6b656;fontSize=12;" target="retrieval_search" value="recall">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_client_context" edge="1" parent="1" source="store_client" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#d6b656;fontSize=12;" target="retrieval_context" value="case context">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_answer_report" edge="1" parent="1" source="retrieval_answer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;fontSize=12;" target="human_report" value="результат специалисту">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_standard_semantic" edge="1" parent="1" source="standard_soap" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#996185;fontSize=12;dashed=1;" target="extract_fact_hyp" value="структура карточек">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_standard_multi" edge="1" parent="1" source="standard_multi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#996185;fontSize=12;dashed=1;" target="store_index" value="поиск">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_standard_roles" edge="1" parent="1" source="standard_roles" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#996185;fontSize=12;dashed=1;" target="retrieval_answer" value="агенты">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
+        <mxCell id="doc_page_note" value="Для полного регламента. Вторая страница хранит правила, формат output, проверки целостности и переход к LLM-очистке." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#4f81bd;fontSize=13;align=left;spacing=8" vertex="1" parent="1"><mxGeometry x="1430" y="760" width="360" height="120" as="geometry" /></mxCell>
+
+        <mxCell id="bottom_note" value="Визуальное правило схемы: основной поток идёт слева направо одной линией. Обратные связи и регламенты не пересекают основной процесс." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;fontStyle=1;align=center" vertex="1" parent="1"><mxGeometry x="500" y="1040" width="1600" height="60" as="geometry" /></mxCell>
+
+        <mxCell id="e12" edge="1" parent="1" source="phase_1" target="phase_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e23" edge="1" parent="1" source="phase_2" target="phase_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e34" edge="1" parent="1" source="phase_3" target="phase_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e45" edge="1" parent="1" source="phase_4" target="phase_5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e56" edge="1" parent="1" source="phase_5" target="phase_6" value="утверждено" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;fontSize=12;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e67" edge="1" parent="1" source="phase_6" target="phase_7" value="recall" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;fontSize=12;"><mxGeometry relative="1" as="geometry" /></mxCell>
       </root>
     </mxGraphModel>
   </diagram>
+
   <diagram name="Скриптовая фрагментация — регламент" id="script-fragmentation-spec">
-    <mxGraphModel dx="2200" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1600" math="0" shadow="0">
+    <mxGraphModel dx="2200" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="spec_title" value="Скриптовая фрагментация — полный регламент" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="320" y="20" width="1560" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_intro" value="Этап выполняет скрипт, а не LLM. Задача этапа — создать стабильный raw-слой фрагментов, который можно однозначно привязать к месту в исходном транскрипте." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;fontStyle=1;align=center" vertex="1" parent="1">
-          <mxGeometry x="350" y="85" width="1500" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_zone_1" value="1. Что делает этап" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="60" y="180" width="470" height="220" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_text_1" value="• Делит исходный текст на стабильные raw fragments.&#xa;• Назначает каждому fragment ID [0001]–[9999].&#xa;• Сохраняет координаты в исходнике: позиции, строки, timestamps.&#xa;• Готовит детерминированный вход для следующего LLM-этапа." style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=15;align=left;spacingLeft=8;spacingTop=8" vertex="1" parent="1">
-          <mxGeometry x="90" y="230" width="410" height="140" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_zone_2" value="2. Что скрипт НЕ делает" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="580" y="180" width="470" height="220" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_text_2" value="• Не выделяет психологический смысл.&#xa;• Не объединяет фрагменты по теме.&#xa;• Не чистит ASR, пунктуацию и роли.&#xa;• Не переписывает, не сокращает и не удаляет текст.&#xa;• Не выкидывает [пауза], [смех], [неразборчиво]." style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=15;align=left;spacingLeft=8;spacingTop=8" vertex="1" parent="1">
-          <mxGeometry x="610" y="225" width="410" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_zone_3" value="3. Жёсткие границы нового fragment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="1100" y="180" width="1040" height="220" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_text_3" value="Новый fragment создаётся, если:&#xa;1) сменился speaker;&#xa;2) начался новый timestamp-блок;&#xa;3) при отсутствии speaker labels встретилась пустая строка между абзацами;&#xa;4) превысился hard limit длины.&#xa;Одинарный перенос строки внутри той же реплики НЕ является новой границей." style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=15;align=left;spacingLeft=8;spacingTop=8" vertex="1" parent="1">
-          <mxGeometry x="1130" y="225" width="980" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_zone_4" value="4. Базовая единица и правило строки" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="60" y="450" width="600" height="240" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_text_4" value="• Если есть speaker labels, базовая единица = реплика говорящего.&#xa;• Несколько строк одной и той же реплики остаются в одном fragment.&#xa;• Если speaker labels нет, базовая единица = абзац, разделённый пустой строкой.&#xa;• Одинарный line break внутри абзаца сохраняется внутри fragment." style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=15;align=left;spacingLeft=8;spacingTop=8" vertex="1" parent="1">
-          <mxGeometry x="95" y="500" width="530" height="155" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_zone_5" value="5. Правило длинной реплики" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="710" y="450" width="670" height="240" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_text_5" value="Target size: 300–800 символов. Hard limit: 1200 символов.&#xa;Если fragment длиннее hard limit, делить в порядке приоритета:&#xa;1) конец предложения (. ? ! …);&#xa;2) точка с запятой; 3) запятая; 4) пробел перед лимитом; 5) крайний случай — по символу.&#xa;Связь частей хранить в metadata, а не в номере." style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=15;align=left;spacingLeft=8;spacingTop=8" vertex="1" parent="1">
-          <mxGeometry x="740" y="500" width="610" height="160" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_zone_6" value="6. Формат output fragment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="1430" y="450" width="710" height="240" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_text_6" value="Обязательные поля: fragment_id, source_id, speaker, raw_text, char_start, char_end, line_start, line_end, timestamp_start, timestamp_end.&#xa;raw_text — это не очищенный текст, а точный кусок исходника.&#xa;Нумерация только сквозная: 0001, 0002, ..., 9999." style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=15;align=left;spacingLeft=8;spacingTop=8" vertex="1" parent="1">
-          <mxGeometry x="1460" y="500" width="650" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_zone_7" value="7. Контрольные проверки" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="60" y="740" width="1020" height="220" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_text_7" value="• Все non-empty символы исходника должны попасть ровно в один fragment.&#xa;• Не должно быть потерь, дубликатов и наложений диапазонов.&#xa;• Нумерация должна быть непрерывной и уникальной.&#xa;• Каждый fragment должен быть восстанавливаем до исходного места в документе.&#xa;• Этап должен быть повторяемым: тот же input → тот же output." style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=15;align=left;spacingLeft=8;spacingTop=8" vertex="1" parent="1">
-          <mxGeometry x="95" y="790" width="950" height="145" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_zone_8" value="8. Переход к следующему этапу" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="1130" y="740" width="1010" height="220" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_text_8" value="После скриптовой фрагментации LLM получает уже не исходный монолитный текст, а пакет raw fragments. Дальше LLM делает санитарную очистку, нормализацию и смысловую сборку, но при этом обязана сохранять source_fragment_ids. Это и есть мост между raw-слоем и semantic memory." style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontSize=15;align=left;spacingLeft=8;spacingTop=8" vertex="1" parent="1">
-          <mxGeometry x="1160" y="790" width="950" height="145" as="geometry" />
-        </mxCell>
-        <mxCell id="spec_bottom" value="Рекомендация: в основном рабочем блоке хранить краткий tooltip + формальные metadata. Полный регламент держать на отдельной странице этой же схемы." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;fontStyle=1;align=center" vertex="1" parent="1">
-          <mxGeometry x="360" y="1010" width="1480" height="70" as="geometry" />
-        </mxCell>
+        <mxCell id="spec_title" value="Скриптовая фрагментация — полный регламент" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=28;fontStyle=1" vertex="1" parent="1"><mxGeometry x="320" y="30" width="1560" height="50" as="geometry" /></mxCell>
+        <mxCell id="spec_intro" value="Этап выполняет скрипт, а не LLM. Его задача — создать стабильный raw-слой фрагментов, который можно однозначно привязать к месту в исходном тексте." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;fontStyle=1;align=center" vertex="1" parent="1"><mxGeometry x="350" y="100" width="1500" height="60" as="geometry" /></mxCell>
+        <mxCell id="spec_1" value="1. Что делает скрипт&#xa;&#xa;• Делит исходный текст на стабильные raw fragments.&#xa;• Назначает ID [0001]–[9999].&#xa;• Сохраняет координаты: char, line, timestamps.&#xa;• Готовит детерминированный вход для LLM-этапа." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="70" y="220" width="470" height="210" as="geometry" /></mxCell>
+        <mxCell id="spec_2" value="2. Что скрипт НЕ делает&#xa;&#xa;• Не выделяет психологический смысл.&#xa;• Не объединяет по теме.&#xa;• Не чистит ASR, пунктуацию и роли.&#xa;• Не переписывает и не сокращает.&#xa;• Не удаляет [пауза], [смех], [неразборчиво]." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="590" y="220" width="470" height="210" as="geometry" /></mxCell>
+        <mxCell id="spec_3" value="3. Когда начинается новый fragment&#xa;&#xa;1) сменился speaker;&#xa;2) начался новый timestamp-блок;&#xa;3) при отсутствии speaker labels встретилась пустая строка между абзацами;&#xa;4) превышен hard limit.&#xa;&#xa;Одинарный перенос строки внутри той же реплики НЕ является новой границей." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="1110" y="220" width="980" height="210" as="geometry" /></mxCell>
+        <mxCell id="spec_4" value="4. Базовая единица&#xa;&#xa;• Если есть speaker labels: базовая единица = реплика говорящего.&#xa;• Несколько строк одной реплики остаются в одном fragment.&#xa;• Если speaker labels нет: базовая единица = абзац, разделённый пустой строкой." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="70" y="500" width="600" height="220" as="geometry" /></mxCell>
+        <mxCell id="spec_5" value="5. Длинная реплика&#xa;&#xa;Target: 300–800 символов. Hard limit: 1200 символов.&#xa;&#xa;Порядок split:&#xa;1) конец предложения (. ? ! …);&#xa;2) точка с запятой; 3) запятая; 4) пробел перед лимитом; 5) по символу.&#xa;&#xa;Связь частей хранится в metadata, не в номере." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="720" y="500" width="670" height="220" as="geometry" /></mxCell>
+        <mxCell id="spec_6" value="6. Формат output fragment&#xa;&#xa;Обязательные поля:&#xa;fragment_id, source_id, speaker, raw_text, char_start, char_end, line_start, line_end, timestamp_start, timestamp_end.&#xa;&#xa;raw_text — точный кусок исходника, не очищенный текст." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="1440" y="500" width="650" height="220" as="geometry" /></mxCell>
+        <mxCell id="spec_7" value="7. Проверки целостности&#xa;&#xa;• Все non-empty символы исходника попали ровно в один fragment.&#xa;• Нет потерь, дублей и наложений диапазонов.&#xa;• Нумерация непрерывная и уникальная.&#xa;• Каждый fragment восстанавливаем до места в исходнике.&#xa;• Один input → один и тот же output." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="70" y="790" width="1020" height="220" as="geometry" /></mxCell>
+        <mxCell id="spec_8" value="8. Переход к LLM-очистке&#xa;&#xa;LLM получает не исходный монолит, а пакет raw fragments. Дальше LLM делает санитарную очистку, нормализацию и смысловую сборку, но обязана сохранять source_fragment_ids. Это мост между raw-слоем и semantic memory." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="1140" y="790" width="950" height="220" as="geometry" /></mxCell>
       </root>
     </mxGraphModel>
   </diagram>
