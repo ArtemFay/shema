@@ -1,0 +1,24 @@
+// AI Cabinet v2 entity architecture
+
+Table entities {
+  entity_id uuid [pk, not null]
+  entity_type text [not null]
+  canonical_name text [not null]
+  summary text
+}
+
+Table sources {
+  source_id uuid [pk, not null]
+  title text [not null]
+  summary text
+}
+
+Table fragments {
+  fragment_id uuid [pk, not null]
+  source_id uuid [not null]
+  raw_text text [not null]
+  normalized_text text [not null]
+  location text
+}
+
+Ref: fragments.source_id > sources.source_id
