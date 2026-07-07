@@ -1,95 +1,307 @@
-<mxfile host="app.diagrams.net" agent="ChatGPT" pages="2">
-  <diagram name="AI-кабинет — память клиента" id="ai-cabinet-memory-workflow">
-    <mxGraphModel dx="2600" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2600" pageHeight="1400" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
+Table "🎞️ ИСТОЧНИКИ" [headercolor: #175e7a] {
+	source_id uuid [ pk, not null, unique, note: 'collection://2fbbd3ce-ad74-483b-9022-c867ec04d388' ]
+	Created timestamp [ not null, note: 'Notion type: created_time' ]
+	"ТИП" text [ note: 'Notion type: select' ]
+	"НАЗВАНИЕ" text [ not null, note: 'Notion type: title' ]
+	"ОПИСАНИЕ" text [ note: 'Notion type: text' ]
+	"САММАРИ" text [ note: 'Notion type: text' ]
+	"Files & media" text [ note: 'Notion type: file' ]
+	"ВЕС" numeric [ note: 'Notion type: number' ]
+	"ЛЮДИ" text [ note: 'Notion type: relation -> collection://856124f9-f514-4f80-9602-6e4b3d4bedb6' ]
+	"ОЦЕНКА" text [ note: 'Notion type: status' ]
+	"Оценка" numeric [ note: 'Notion type: number' ]
+	"ПЕРЕХОД" text [ note: 'Notion type: formula; notAvailableInQuerySql' ]
+	"ПОЛНОСТЬЮ ЗАВЕРШЕНО" boolean [ note: 'Notion type: checkbox' ]
+	"ПРОВЕРЕНО КЕМ" text [ note: 'Notion type: person' ]
+	IMDB numeric [ note: 'Notion type: number' ]
+	"СОЗДАНО КЕМ" text [ note: 'Notion type: select' ]
+	"ССЫЛКА" text [ note: 'Notion type: url' ]
+	"СТАТУС" text [ note: 'Notion type: select' ]
+	"ТЕМЫ" text [ note: 'Notion type: relation -> collection://92ec1584-b174-4ebf-baf4-c54a5656ef84; JSON array в Notion' ]
+	"ЦИТАТЫ" text [ note: 'Notion type: relation -> collection://d1b96271-666d-4f16-b323-62b6fa6e2160' ]
 
-        <mxCell id="title" value="AI-кабинет: схема профессиональной памяти клиента" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=28;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="420" y="30" width="1760" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="subtitle" value="Главный принцип: память — не summary, а доказательная картотека кейса. Каждый вывод связан с исходным фрагментом." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;align=center" vertex="1" parent="1">
-          <mxGeometry x="470" y="90" width="1660" height="50" as="geometry" />
-        </mxCell>
+	Note: 'Источник — это не знание системы, а место происхождения знания.'
+}
 
-        <mxCell id="phase_1" value="1. Источник" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=18;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="70" y="190" width="230" height="80" as="geometry" />
-        </mxCell>
-        <UserObject id="phase_2" label="&lt;b&gt;2. Скриптовая&lt;br&gt;фрагментация&lt;/b&gt;" tooltip="Детерминированная raw-нарезка скриптом. Не LLM. Скрипт не чистит и не интерпретирует смысл. Новый fragment создается при смене speaker, timestamp-блоке, пустой строке между абзацами без speaker labels или hard limit. Одинарный перенос строки не является границей. Выход: fragment_id, raw_text, speaker, char/line ranges, timestamps." owner="script" layer="raw" boundary_rules="speaker_change|timestamp_block|blank_line_without_speaker|hard_limit" one_newline_rule="keep_inside_fragment" hard_limit_chars="1200" target_chars="300-800" split_order="sentence; semicolon; comma; space; char" prohibited_actions="no_cleanup; no_semantic_grouping; no_rewrite; no_drop" output_fields="fragment_id; source_id; speaker; raw_text; char_start; char_end; line_start; line_end; timestamp_start; timestamp_end">
-          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;fontStyle=1" vertex="1" parent="1">
-            <mxGeometry x="390" y="190" width="230" height="80" as="geometry" />
-          </mxCell>
-        </UserObject>
-        <mxCell id="phase_3" value="3. LLM-очистка" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=18;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="710" y="190" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="phase_4" value="4. Извлечение памяти" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=18;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="1030" y="190" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="phase_5" value="5. Проверка специалистом" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=18;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="1350" y="190" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="phase_6" value="6. Память клиента" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=18;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="1670" y="190" width="230" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="phase_7" value="7. Recall / ответ ИИ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=18;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="1990" y="190" width="230" height="80" as="geometry" />
-        </mxCell>
+Table "📌 ТЕЗИСЫ" [headercolor: #175e7a] {
+	claim_id uuid [ pk, not null, unique, note: 'collection://cf0cbe64-d59b-439a-877d-9ca6e0c7eba5' ]
+	"ТЕЗИС" text [ not null, note: 'Notion type: title' ]
+	Created timestamp [ not null, note: 'Notion type: created_time' ]
+	"Last edited" timestamp [ not null, note: 'Notion type: last_edited_time' ]
+	"АКТУАЛЬНОСТЬ" text [ not null, note: 'Notion type: select' ]
+	"ВЕС" numeric [ not null, note: 'Notion type: number' ]
+	"КОНТЕКСТ" text [ not null, note: 'Нужно помимо самого тезиса сохранить откуда взялся и почему тезис важен. Границы применения и т.д.' ]
+	"ВОПРОСЫ ДЛЯ ПРОВЕРКИ" text [ note: 'Notion type: text' ]
+	"ГРУППЫ" text [ note: 'Notion type: relation -> collection://35c4a32e-95c5-419c-8131-857e8aa1f2ae' ]
+	"ДАТА ПРОВЕРКИ" date [ note: 'Notion type: date' ]
+	"ИЗМЕНЕНО КЕМ" text [ note: 'Notion type: select' ]
+	"ОБЛАСТЬ ПРИМЕНЕНИЯ" text [ note: 'Notion type: multi_select' ]
+	"ОБОСНОВЫВАЕТ" text [ note: 'Notion type: relation -> collection://cf0cbe64-d59b-439a-877d-9ca6e0c7eba5; JSON array в Notion' ]
+	"ОРГАНИЗАЦИИ" text [ note: 'Notion type: relation -> collection://3aceb0b0-8e87-4922-a1fb-a7e00bde9c51' ]
+	"ОСНОВАНИЯ" text [ note: 'Notion type: relation -> collection://cf0cbe64-d59b-439a-877d-9ca6e0c7eba5; JSON array в Notion' ]
+	"ПРИЧИНА ИЗМЕНЕНИЯ AI" text [ note: 'Notion type: text' ]
+	"ПРОВЕРЕНО КЕМ" text [ note: 'Notion type: person' ]
+	"ПРОЕКТЫ" text [ note: 'Notion type: relation -> collection://662e6140-2e55-40b4-8a67-e5d7aabe67bf' ]
+	"РИСК ОШИБОЧНОЙ ГИПОТЕЗЫ" text [ note: 'Notion type: text' ]
+	"СОБЫТИЯ" text [ note: 'Notion type: relation -> collection://57019b2b-a79d-4fcf-b9c2-1f0573ae0d4d' ]
+	"СОЗДАНО КЕМ" text [ note: 'Notion type: select' ]
+	"СТАТУС" text [ note: 'Notion type: select' ]
+	"СТАТУС ГИПОТЕЗЫ" text [ note: 'Notion type: select' ]
+	"ТИП ТЕЗИСА" text [ note: 'Notion type: select' ]
+	"УРОВЕНЬ УВЕРЕННОСТИ" text [ note: 'Notion type: select' ]
+	"УРОВЕНЬ УТВЕРЖДЕНИЯ" text [ note: 'Notion type: select' ]
+	"ФОРМУЛИРОВКА" text [ note: 'Notion type: text' ]
 
-        <mxCell id="d1" value="Транскрипт, заметки, анкеты, документы. Raw source сохраняется без потери первоисточника." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b85450;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="50" y="330" width="270" height="150" as="geometry" /></mxCell>
-        <mxCell id="d2" value="Скрипт создает стабильные raw fragments [0001]–[9999]. Границы: speaker, timestamp, пустая строка без speaker labels, hard limit. Не чистит текст и не ищет смысл." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="370" y="330" width="270" height="150" as="geometry" /></mxCell>
-        <mxCell id="d3" value="LLM получает пакет raw fragments и делает санитарную очистку: ASR, пунктуация, роли, смысловая сборка. Обязана сохранять source_fragment_ids." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="690" y="330" width="270" height="150" as="geometry" /></mxCell>
-        <mxCell id="d4" value="Из чистых сегментов извлекаются карточки: факт, гипотеза, вопрос, задача, паттерн. Каждая карточка получает evidence refs." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="1010" y="330" width="270" height="150" as="geometry" /></mxCell>
-        <mxCell id="d5" value="ИИ предлагает изменения памяти. Специалист принимает, исправляет или отклоняет. Без утверждения память не меняется." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="1330" y="330" width="270" height="150" as="geometry" /></mxCell>
-        <mxCell id="d6" value="Хранилища: client case, sessions, semantic_items, revisions, evidence_refs, JSONB/FTS/pgvector indexes." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="1650" y="330" width="270" height="150" as="geometry" /></mxCell>
-        <mxCell id="d7" value="Перед новой сессией ИИ ищет релевантную память, собирает контекст и готовит рабочий ответ специалисту." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=14;align=left;spacing=10" vertex="1" parent="1"><mxGeometry x="1970" y="330" width="270" height="150" as="geometry" /></mxCell>
+	Note: '''Смысловые атомы. Тезис — это смысл, который можно использовать отдельно.
+На один значимый фрагмент — 0–3 тезиса.
+Обычно 1.
+Если фрагмент технический, справочный или повторяющийся — 0.
+Если фрагмент плотный — 2–3.'''
+}
 
-        <mxCell id="doc_zone" value="Как хранить подробное описание блока внутри Draw.io" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf3ff;strokeColor=#4f81bd;fontSize=18;fontStyle=1;align=center;verticalAlign=top;spacingTop=14" vertex="1" parent="1">
-          <mxGeometry x="370" y="570" width="1490" height="390" as="geometry" />
-        </mxCell>
-        <UserObject id="doc_tooltip" label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;A. Tooltip" tooltip="Короткая памятка: что делает скрипт, что не делает, где граница fragment, какие поля output обязательны." mode="tooltip">
-          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4f81bd;fontSize=15;fontStyle=1" vertex="1" parent="1"><mxGeometry x="430" y="650" width="360" height="90" as="geometry" /></mxCell>
-        </UserObject>
-        <mxCell id="doc_tooltip_note" value="Для быстрого чтения при наведении. Сюда кладется короткое правило: скрипт режет raw-текст детерминированно, не чистит и не интерпретирует." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#4f81bd;fontSize=13;align=left;spacing=8" vertex="1" parent="1"><mxGeometry x="430" y="760" width="360" height="120" as="geometry" /></mxCell>
+Table "🧠 ТЕМЫ" [headercolor: #175e7a] {
+	topic_id uuid [ pk, not null, unique, note: 'collection://92ec1584-b174-4ebf-baf4-c54a5656ef84' ]
+	"Тема" text [ not null, note: 'Notion type: title' ]
+	"Parent item" text [ note: 'Notion type: relation -> collection://92ec1584-b174-4ebf-baf4-c54a5656ef84; limit: 1' ]
+	"Sub-item" text [ note: 'Notion type: relation -> collection://92ec1584-b174-4ebf-baf4-c54a5656ef84; JSON array в Notion' ]
+	"Описание" text [ note: 'Notion type: text' ]
 
-        <UserObject id="doc_metadata" label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;B. Metadata" owner="script" layer="raw" boundary_rules="speaker|timestamp|blank_line|hard_limit" output="fragment_id;raw_text;coordinates" limits="target 300-800; hard 1200">
-          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4f81bd;fontSize=15;fontStyle=1" vertex="1" parent="1"><mxGeometry x="930" y="650" width="360" height="90" as="geometry" /></mxCell>
-        </UserObject>
-        <mxCell id="doc_metadata_note" value="Для формальной спецификации. Сюда кладутся machine-readable поля: boundary_rules, лимиты, запреты, output_fields, тип слоя raw." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#4f81bd;fontSize=13;align=left;spacing=8" vertex="1" parent="1"><mxGeometry x="930" y="760" width="360" height="120" as="geometry" /></mxCell>
+	Note: '''Темы - не источники и не саммари источников. Это wiki статьи, которые собирают осмысленную информацию из разных источников.
+Тема Эриксоновский гипноз может ссылаться на сотни источников, собирая информацию из них воедино с указанием ссылок на первоисточники.'''
+}
 
-        <UserObject id="doc_page" label="&lt;b&gt;Скриптовая фрагментация&lt;/b&gt;&lt;br&gt;C. Отдельная страница" tooltip="Полный регламент вынесен на вторую страницу этой схемы: 'Скриптовая фрагментация — регламент'.">
-          <mxCell style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4f81bd;fontSize=15;fontStyle=1" vertex="1" parent="1"><mxGeometry x="1430" y="650" width="360" height="90" as="geometry" /></mxCell>
-        </UserObject>
-        <mxCell id="doc_page_note" value="Для полного регламента. Вторая страница хранит правила, формат output, проверки целостности и переход к LLM-очистке." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#4f81bd;fontSize=13;align=left;spacing=8" vertex="1" parent="1"><mxGeometry x="1430" y="760" width="360" height="120" as="geometry" /></mxCell>
+Table "ТЕЗИСЫ ↔ ИСТОЧНИКИ" [headercolor: #175e7a] {
+	claim_id uuid [ pk, not null ]
+	source_id uuid [ pk, not null ]
 
-        <mxCell id="bottom_note" value="Визуальное правило схемы: основной поток идёт слева направо одной линией. Обратные связи и регламенты не пересекают основной процесс." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;fontStyle=1;align=center" vertex="1" parent="1"><mxGeometry x="500" y="1040" width="1600" height="60" as="geometry" /></mxCell>
+	indexes {
+		(claim_id, source_id) [ name: 'ТЕЗИСЫ ↔ ИСТОЧНИКИ_index_0', unique ]
+	}
 
-        <mxCell id="e12" edge="1" parent="1" source="phase_1" target="phase_2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e23" edge="1" parent="1" source="phase_2" target="phase_3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e34" edge="1" parent="1" source="phase_3" target="phase_4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e45" edge="1" parent="1" source="phase_4" target="phase_5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e56" edge="1" parent="1" source="phase_5" target="phase_6" value="утверждено" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;fontSize=12;"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e67" edge="1" parent="1" source="phase_6" target="phase_7" value="recall" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#666666;fontSize=12;"><mxGeometry relative="1" as="geometry" /></mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
+	Note: 'Notion relation: поле ТЕЗИСЫ.ИСТОЧНИКИ. В SQLite хранится как JSON array page URLs. Семантика: many-to-many.'
+}
 
-  <diagram name="Скриптовая фрагментация — регламент" id="script-fragmentation-spec">
-    <mxGraphModel dx="2200" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1400" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <mxCell id="spec_title" value="Скриптовая фрагментация — полный регламент" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=28;fontStyle=1" vertex="1" parent="1"><mxGeometry x="320" y="30" width="1560" height="50" as="geometry" /></mxCell>
-        <mxCell id="spec_intro" value="Этап выполняет скрипт, а не LLM. Его задача — создать стабильный raw-слой фрагментов, который можно однозначно привязать к месту в исходном тексте." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;fontStyle=1;align=center" vertex="1" parent="1"><mxGeometry x="350" y="100" width="1500" height="60" as="geometry" /></mxCell>
-        <mxCell id="spec_1" value="1. Что делает скрипт&#xa;&#xa;• Делит исходный текст на стабильные raw fragments.&#xa;• Назначает ID [0001]–[9999].&#xa;• Сохраняет координаты: char, line, timestamps.&#xa;• Готовит детерминированный вход для LLM-этапа." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="70" y="220" width="470" height="210" as="geometry" /></mxCell>
-        <mxCell id="spec_2" value="2. Что скрипт НЕ делает&#xa;&#xa;• Не выделяет психологический смысл.&#xa;• Не объединяет по теме.&#xa;• Не чистит ASR, пунктуацию и роли.&#xa;• Не переписывает и не сокращает.&#xa;• Не удаляет [пауза], [смех], [неразборчиво]." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="590" y="220" width="470" height="210" as="geometry" /></mxCell>
-        <mxCell id="spec_3" value="3. Когда начинается новый fragment&#xa;&#xa;1) сменился speaker;&#xa;2) начался новый timestamp-блок;&#xa;3) при отсутствии speaker labels встретилась пустая строка между абзацами;&#xa;4) превышен hard limit.&#xa;&#xa;Одинарный перенос строки внутри той же реплики НЕ является новой границей." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="1110" y="220" width="980" height="210" as="geometry" /></mxCell>
-        <mxCell id="spec_4" value="4. Базовая единица&#xa;&#xa;• Если есть speaker labels: базовая единица = реплика говорящего.&#xa;• Несколько строк одной реплики остаются в одном fragment.&#xa;• Если speaker labels нет: базовая единица = абзац, разделённый пустой строкой." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="70" y="500" width="600" height="220" as="geometry" /></mxCell>
-        <mxCell id="spec_5" value="5. Длинная реплика&#xa;&#xa;Target: 300–800 символов. Hard limit: 1200 символов.&#xa;&#xa;Порядок split:&#xa;1) конец предложения (. ? ! …);&#xa;2) точка с запятой; 3) запятая; 4) пробел перед лимитом; 5) по символу.&#xa;&#xa;Связь частей хранится в metadata, не в номере." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="720" y="500" width="670" height="220" as="geometry" /></mxCell>
-        <mxCell id="spec_6" value="6. Формат output fragment&#xa;&#xa;Обязательные поля:&#xa;fragment_id, source_id, speaker, raw_text, char_start, char_end, line_start, line_end, timestamp_start, timestamp_end.&#xa;&#xa;raw_text — точный кусок исходника, не очищенный текст." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="1440" y="500" width="650" height="220" as="geometry" /></mxCell>
-        <mxCell id="spec_7" value="7. Проверки целостности&#xa;&#xa;• Все non-empty символы исходника попали ровно в один fragment.&#xa;• Нет потерь, дублей и наложений диапазонов.&#xa;• Нумерация непрерывная и уникальная.&#xa;• Каждый fragment восстанавливаем до места в исходнике.&#xa;• Один input → один и тот же output." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="70" y="790" width="1020" height="220" as="geometry" /></mxCell>
-        <mxCell id="spec_8" value="8. Переход к LLM-очистке&#xa;&#xa;LLM получает не исходный монолит, а пакет raw fragments. Дальше LLM делает санитарную очистку, нормализацию и смысловую сборку, но обязана сохранять source_fragment_ids. Это мост между raw-слоем и semantic memory." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;align=left;spacing=12" vertex="1" parent="1"><mxGeometry x="1140" y="790" width="950" height="220" as="geometry" /></mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-</mxfile>
+Table "ТЕЗИСЫ ↔ ТЕМЫ" [headercolor: #175e7a] {
+	claim_id uuid [ pk, not null ]
+	topic_id uuid [ pk, not null ]
+
+	indexes {
+		(claim_id, topic_id) [ name: 'ТЕЗИСЫ ↔ ТЕМЫ_index_0', unique ]
+	}
+
+	Note: 'Notion relation: поле ТЕЗИСЫ.ТЕМЫ. В SQLite хранится как JSON array page URLs. Семантика: many-to-many.'
+}
+
+Table "Связь: ТЕЗИСЫ.ОСНОВАНИЯ ↔ ТЕЗИСЫ" [headercolor: #175e7a] {
+	claim_id text [ not null ]
+	base_claim_id text [ not null ]
+
+	indexes {
+		(claim_id, base_claim_id) [ name: 'Связь: ТЕЗИСЫ.ОСНОВАНИЯ ↔ ТЕЗИСЫ_index_3' ]
+	}
+
+	Note: 'Notion self-relation: поле ТЕЗИСЫ.ОСНОВАНИЯ. Целевой data source тот же: ТЕЗИСЫ.'
+}
+
+Table "Связь: ТЕЗИСЫ.ОБОСНОВЫВАЕТ ↔ ТЕЗИСЫ" [headercolor: #175e7a] {
+	claim_id text [ not null ]
+	supported_claim_id text [ not null ]
+
+	indexes {
+		(claim_id, supported_claim_id) [ name: 'Связь: ТЕЗИСЫ.ОБОСНОВЫВАЕТ ↔ ТЕЗИСЫ_index_4' ]
+	}
+
+	Note: 'Notion self-relation: поле ТЕЗИСЫ.ОБОСНОВЫВАЕТ. Целевой data source тот же: ТЕЗИСЫ.'
+}
+
+Table "Связь: ТЕМЫ.Parent item / Sub-item" [headercolor: #175e7a] {
+	parent_topic_id text [ not null ]
+	child_topic_id text [ not null ]
+
+	indexes {
+		(parent_topic_id, child_topic_id) [ name: 'Связь: ТЕМЫ.Parent item / Sub-item_index_5' ]
+		(child_topic_id) [ name: 'Связь: ТЕМЫ.Parent item / Sub-item_index_6', unique ]
+	}
+
+	Note: 'Notion self-relation: Parent item / Sub-item. У Parent item стоит limit: 1, значит у одной дочерней темы максимум один родитель.'
+}
+
+Table "🏛️ ОРГАНИЗАЦИИ" [headercolor: #175e7a] {
+	notion_id text [ pk, unique ]
+	"ОРГАНИЗАЦИЯ" text [ not null, note: 'Notion type: title' ]
+	Created timestamp [ note: 'Notion type: created_time' ]
+	"Last edited" timestamp [ note: 'Notion type: last_edited_time' ]
+	"ВЕКТОР ДЕЯТЕЛЬНОСТИ" text [ note: 'Notion type: text' ]
+	"ВЕС ДОВЕРИЯ" numeric [ note: 'Notion type: number' ]
+	"ГРУППЫ" text [ note: 'Notion type: relation' ]
+	"ДАТА ПРОВЕРКИ" date [ note: 'Notion type: date' ]
+	"ИЗМЕНЕНО КЕМ" text [ note: 'Notion type: select' ]
+	"ИСТОЧНИКИ" text [ note: 'Notion type: relation' ]
+	"ЛЮДИ" text [ note: 'Notion type: relation' ]
+	"ОПИСАНИЕ" text [ note: 'Notion type: text' ]
+	"ПРИЧИНА ИЗМЕНЕНИЯ AI" text [ note: 'Notion type: text' ]
+	"ПРОВЕРЕНО КЕМ" text [ note: 'Notion type: person' ]
+	"ПРОЕКТЫ" text [ note: 'Notion type: relation' ]
+	"СОБЫТИЯ" text [ note: 'Notion type: relation' ]
+	"СОЗДАНО КЕМ" text [ note: 'Notion type: select' ]
+	"СТАТУС" text [ note: 'Notion type: status' ]
+	"СТАТУС ВАЛИДАЦИИ" text [ note: 'Notion type: select' ]
+	"ТЕМЫ" text [ note: 'Notion type: relation' ]
+	"ТИП ОРГАНИЗАЦИИ" text [ note: 'Notion type: select' ]
+}
+
+Table "ЛЮДИ" [headercolor: #175e7a] {
+	notion_id text [ pk, unique ]
+}
+
+Table "ГРУППЫ" [headercolor: #175e7a] {
+	notion_id text [ pk, unique ]
+}
+
+Table "РОЛИ В ОРГАНИЗАЦИЯХ" [headercolor: #175e7a] {
+	notion_id text [ pk, unique ]
+}
+
+Table "ПЕРИОДЫ_DB" [headercolor: #175e7a] {
+	period_id uuid [ pk, not null, unique ]
+	"тип_периода" text [ not null, note: 'день / неделя / месяц / квартал / год / 10 лет / жизнь' ]
+	"дата_начала" date [ not null ]
+	"дата_окончания" date
+	"название" text [ not null ]
+	summary text
+	"статус" text [ not null ]
+	"дата_создано" date [ not null ]
+	"дата_обновлено" date [ not null ]
+
+	indexes {
+		("тип_периода", "дата_начала") [ name: 'ТИП+ДАТА_НАЧ', unique ]
+	}
+}
+
+Table Tasks [headercolor: #175e7a] {
+	notion_id text [ pk, unique ]
+}
+
+Table Projects [headercolor: #175e7a] {
+	notion_id text [ pk, unique ]
+}
+
+Table "СОБЫТИЯ" [headercolor: #175e7a] {
+	event_id uuid [ pk, not null, unique ]
+	"МАСШТАБ" text [ default: 'День', note: '''- День
+- Неделя
+- Месяц
+- Год
+- 10 лет
+- Жизнь
+
+Наследование: Год включает все, что меньше и т.д.''' ]
+}
+
+Table "НЕРАЗОБРАННЫЕ ССЫЛКИ" [headercolor: #175e7a] {
+	notion_id text [ pk, unique ]
+}
+
+Table "ПЕРИОДЫ ↔ ИСТОЧНИКИ" [headercolor: #175e7a] {
+	source_id uuid [ pk, not null ]
+	period_id uuid [ pk, not null ]
+	"ДЕЙСТВИЕ" text
+
+	indexes {
+		(claim_id, topic_id) [ name: 'ТЕЗИСЫ ↔ ТЕМЫ_index_0', unique ]
+	}
+
+	Note: 'Notion relation: поле ТЕЗИСЫ.ТЕМЫ. В SQLite хранится как JSON array page URLs. Семантика: many-to-many.'
+}
+
+Table "ЗАМЕРЫ" [headercolor: #175e7a] {
+	zamer_id uuid [ pk, not null ]
+	day date [ pk, not null ]
+	"Вес, кг" integer
+	"Лег спать" time
+	"Проснулся" time
+	"Оценка сна" integer
+	"Часов сна" integer
+}
+
+Table "ПРИВЫЧКИ" [headercolor: #175e7a] {
+	id integer [ pk, increment, not null ]
+}
+
+Table "ТРЕКЕР_ПРИВЫЧЕК" [headercolor: #175e7a] {
+	id integer [ pk, increment, not null ]
+}
+
+Table "ПЕРИОДЫ ↔ СОБЫТИЯ" [headercolor: #175e7a] {
+	event_id uuid [ pk, not null ]
+	period_id uuid [ pk, not null ]
+	"ДЕЙСТВИЕ" text
+
+	indexes {
+		(claim_id, topic_id) [ name: 'ТЕЗИСЫ ↔ ТЕМЫ_index_0', unique ]
+	}
+
+	Note: 'Notion relation: поле ТЕЗИСЫ.ТЕМЫ. В SQLite хранится как JSON array page URLs. Семантика: many-to-many.'
+}
+
+Table "ТЕМЫ ↔ ИСТОЧНИКИ" [headercolor: #175e7a] {
+	topic_id uuid [ pk, not null ]
+	source_id uuid [ pk, not null ]
+	"ВКЛАД" text [ note: 'Какой вклад источник дает в тему' ]
+	"ВЕС" integer [ note: 'Вес или значимость источника для темы' ]
+
+	indexes {
+		(claim_id, source_id) [ name: 'ТЕЗИСЫ ↔ ИСТОЧНИКИ_index_0', unique ]
+	}
+
+	Note: 'Notion relation: поле ТЕЗИСЫ.ИСТОЧНИКИ. В SQLite хранится как JSON array page URLs. Семантика: many-to-many.'
+}
+
+Table "ФРАГМЕНТЫ" [headercolor: #175e7a] {
+	id integer [ pk, increment, not null ]
+	RAW_TEXT text [ not null, note: 'исходная цитата / кусок источника' ]
+	normalized_text text [ not null, note: 'очищенная версия: пунктуация, структура, краткое упорядочивание;' ]
+	location text [ not null, note: 'где это находится в источнике.' ]
+
+	Note: 'Фрагмент — это нормализованный, но доказательно привязанный смысловой кусок одного источника.'
+}
+
+Ref "" {
+	"📌 ТЕЗИСЫ".claim_id < "ТЕЗИСЫ ↔ ИСТОЧНИКИ".claim_id [ delete: no action, update: no action ]
+}
+
+Ref "" {
+	"ТЕЗИСЫ ↔ ИСТОЧНИКИ".source_id > "🎞️ ИСТОЧНИКИ".source_id [ delete: no action, update: no action ]
+}
+
+Ref "" {
+	"📌 ТЕЗИСЫ".claim_id < "ТЕЗИСЫ ↔ ТЕМЫ".claim_id [ delete: no action, update: no action ]
+}
+
+Ref "" {
+	"🧠 ТЕМЫ".topic_id < "ТЕЗИСЫ ↔ ТЕМЫ".topic_id [ delete: no action, update: no action ]
+}
+
+Ref "" {
+	"🎞️ ИСТОЧНИКИ".source_id < "ПЕРИОДЫ ↔ ИСТОЧНИКИ".source_id [ delete: no action, update: no action ]
+}
+
+Ref "" {
+	"ПЕРИОДЫ ↔ ИСТОЧНИКИ".period_id - "ПЕРИОДЫ_DB".period_id [ delete: no action, update: no action ]
+}
+
+Ref "" {
+	"ПЕРИОДЫ_DB".period_id - "ПЕРИОДЫ ↔ СОБЫТИЯ".period_id [ delete: no action, update: no action ]
+}
+
+Ref "" {
+	"СОБЫТИЯ".event_id - "ПЕРИОДЫ ↔ СОБЫТИЯ".event_id [ delete: no action, update: no action ]
+}
+
+Ref "" {
+	"🎞️ ИСТОЧНИКИ".source_id - "ТЕМЫ ↔ ИСТОЧНИКИ".source_id [ delete: no action, update: no action ]
+}
+
+Ref "" {
+	"ТЕМЫ ↔ ИСТОЧНИКИ".topic_id - "🧠 ТЕМЫ".topic_id [ delete: no action, update: no action ]
+}
