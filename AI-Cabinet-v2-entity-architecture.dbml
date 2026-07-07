@@ -1,0 +1,310 @@
+// AI-Cabinet v2 Entity Architecture
+// Import this file into drawDB as DBML.
+
+Project AI_Cabinet_v2 {
+  database_type: 'PostgreSQL'
+  Note: 'Universal entity layer, evidence fragments, human-readable wiki articles, reusable theses, semantic retrieval context.'
+}
+
+Table entities [headercolor: #175e7a] {
+  entity_id uuid [pk, not null, unique]
+  entity_type text [not null, note: 'person / organization / book / place / period / event / concept / program / program_step / project / topic']
+  canonical_name text [not null]
+  summary text [note: 'Short navigation summary']
+  status text [not null, default: 'active', note: 'active / draft / archived / merged']
+  confidence numeric
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (entity_type, canonical_name) [name: 'entities_type_name_idx']
+  }
+
+  Note: 'Universal ID table for all stable objects. Entity is the object itself; wiki_article is a readable page about the object.'
+}
+
+Table entity_aliases [headercolor: #175e7a] {
+  alias_id uuid [pk, not null, unique]
+  entity_id uuid [not null]
+  alias text [not null]
+  alias_type text [note: 'name / abbreviation / old_name / spelling / nickname']
+  created_at timestamp [not null]
+}
+
+Table person_profiles [headercolor: #175e7a] {
+  entity_id uuid [pk, not null]
+  display_name text
+  roles text
+  notes text
+}
+
+Table organization_profiles [headercolor: #175e7a] {
+  entity_id uuid [pk, not null]
+  organization_type text [note: 'company / community / institution / group']
+  website text
+  description text
+}
+
+Table book_profiles [headercolor: #175e7a] {
+  entity_id uuid [pk, not null]
+  author_text text
+  author_entity_id uuid
+  year integer
+  isbn text
+  original_title text
+}
+
+Table period_profiles [headercolor: #175e7a] {
+  entity_id uuid [pk, not null]
+  period_type text [not null, note: 'day / week / month / quarter / year / life_period / custom']
+  start_date date [not null]
+  end_date date
+  timezone text
+
+  indexes {
+    (period_type, start_date) [name: 'period_type_start_idx']
+  }
+}
+
+Table event_profiles [headercolor: #175e7a] {
+  entity_id uuid [pk, not null]
+  start_at timestamp
+  end_at timestamp
+  place_entity_id uuid
+  event_type text
+  description text
+}
+
+Table sources [headercolor: #175e7a] {
+  source_id uuid [pk, not null, unique]
+  title text [not null]
+  source_type text [not null, note: 'transcript / web_page / book / video / audio / note / chat / document']
+  source_entity_id uuid [note: 'If the source itself is also an entity']
+  url text
+  file_uri text
+  source_date date
+  summary text [note: 'Summary of the whole source. This is not a fragment.']
+  quality_weight numeric
+  status text [not null, default: 'new', note: 'new / parsed / reviewed / archived']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table fragments [headercolor: #175e7a] {
+  fragment_id uuid [pk, not null, unique]
+  source_id uuid [not null]
+  parent_fragment_id uuid [note: 'Optional grouping of related subfragments']
+  sequence_no integer [note: 'Order inside the source']
+  location text [not null, note: 'Page, chapter, timestamp, paragraph, URL anchor']
+  raw_text text [not null, note: 'Original quote or source slice']
+  normalized_text text [not null, note: 'Cleaned version: punctuation, structure, obvious noise removal']
+  fragment_summary text [note: 'Short meaning of the fragment']
+  fragment_type text [note: 'definition / list_item / argument / example / case / quote / instruction / observation']
+  status text [not null, default: 'draft', note: 'draft / accepted / rejected / merged']
+  confidence numeric
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (source_id, sequence_no) [name: 'fragments_source_sequence_idx']
+  }
+}
+
+Table fragment_entities [headercolor: #175e7a] {
+  fragment_id uuid [pk, not null]
+  entity_id uuid [pk, not null]
+  role text [note: 'about / mentions / evidence_for / context_for / contradicts']
+  relevance numeric
+}
+
+Table wiki_articles [headercolor: #175e7a] {
+  article_id uuid [pk, not null, unique]
+  primary_entity_id uuid [not null, note: 'Main entity described by the article']
+  title text [not null]
+  article_kind text [not null, default: 'canonical', note: 'canonical / comparison / lens / research_note']
+  summary text [note: 'Short article summary for navigation']
+  body_md text [not null, note: 'Human-readable wiki page in Markdown']
+  status text [not null, default: 'draft', note: 'draft / active / needs_review / archived']
+  version integer [not null, default: 1]
+  last_synthesized_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (primary_entity_id, article_kind) [name: 'wiki_primary_entity_kind_idx']
+  }
+}
+
+Table article_fragments [headercolor: #175e7a] {
+  article_id uuid [pk, not null]
+  fragment_id uuid [pk, not null]
+  usage_role text [note: 'evidence / example / quote / background / contradiction']
+  contribution_summary text [note: 'What this fragment contributes to the article']
+  weight numeric
+}
+
+Table article_entities [headercolor: #175e7a] {
+  article_id uuid [pk, not null]
+  entity_id uuid [pk, not null]
+  role text [note: 'primary / secondary / compared / mentioned / applied_to']
+  relevance numeric
+}
+
+Table theses [headercolor: #175e7a] {
+  thesis_id uuid [pk, not null, unique]
+  statement text [not null, note: 'Normalized meaning statement']
+  short_formula text [note: 'Short memorable formula']
+  context text [note: 'Why the thesis matters and where its limits are']
+  thesis_type text [note: 'principle / interpretation / hypothesis / rule / observation / quote_summary']
+  scope text [note: 'personal / work / general / technical / research']
+  confidence numeric
+  status text [not null, default: 'draft', note: 'draft / active / needs_review / archived / merged']
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+}
+
+Table thesis_fragments [headercolor: #175e7a] {
+  thesis_id uuid [pk, not null]
+  fragment_id uuid [pk, not null]
+  evidence_role text [note: 'supports / contradicts / illustrates / origin / boundary']
+  weight numeric
+}
+
+Table article_theses [headercolor: #175e7a] {
+  article_id uuid [pk, not null]
+  thesis_id uuid [pk, not null]
+  usage_role text [note: 'core / supporting / contrast / application / question']
+  weight numeric
+}
+
+Table relation_types [headercolor: #175e7a] {
+  relation_type_id uuid [pk, not null, unique]
+  code text [not null, unique, note: 'member_of / contains / influenced_by / authored / about / applies_to / contradicts / supports']
+  name text [not null]
+  inverse_code text
+  description text
+}
+
+Table relations [headercolor: #175e7a] {
+  relation_id uuid [pk, not null, unique]
+  subject_entity_id uuid [not null]
+  relation_type_id uuid [not null]
+  object_entity_id uuid [not null]
+  summary text [note: 'Short description of the relation']
+  confidence numeric
+  status text [not null, default: 'active']
+  valid_from date
+  valid_to date
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
+
+  indexes {
+    (subject_entity_id, relation_type_id, object_entity_id) [name: 'relations_triplet_idx']
+  }
+}
+
+Table relation_evidence_fragments [headercolor: #175e7a] {
+  relation_id uuid [pk, not null]
+  fragment_id uuid [pk, not null]
+  evidence_role text [note: 'supports / contradicts / source_of_relation / example']
+  weight numeric
+}
+
+Table semantic_index_items [headercolor: #175e7a] {
+  index_item_id uuid [pk, not null, unique]
+  item_type text [not null, note: 'fragment / wiki_article / thesis / entity / relation / source_summary']
+  item_id uuid [not null]
+  entity_id uuid [note: 'Optional main entity for fast filtering']
+  text_for_embedding text [not null]
+  metadata jsonb
+  embedding vector [note: 'pgvector embedding']
+  updated_at timestamp [not null]
+
+  indexes {
+    (item_type, item_id) [name: 'semantic_index_item_idx']
+  }
+}
+
+Table query_context_runs [headercolor: #175e7a] {
+  run_id uuid [pk, not null, unique]
+  user_query text [not null]
+  detected_entities jsonb
+  detected_intent text [note: 'explain / compare / apply_to_entity / summarize / find_conflict']
+  retrieval_strategy text [note: 'entity_graph + semantic_search + evidence_fragments']
+  created_at timestamp [not null]
+}
+
+Table query_context_items [headercolor: #175e7a] {
+  run_id uuid [pk, not null]
+  item_type text [pk, not null, note: 'entity / article / thesis / fragment / relation / source']
+  item_id uuid [pk, not null]
+  rank_score numeric
+  inclusion_reason text [note: 'Why this item was included in the context']
+  token_budget_group text [note: 'must_include / useful / optional / excluded']
+}
+
+Table processing_runs [headercolor: #175e7a] {
+  processing_run_id uuid [pk, not null, unique]
+  source_id uuid
+  pipeline_stage text [not null, note: 'ingest / fragment / entity_linking / thesis_extract / article_update / index_update']
+  status text [not null, note: 'queued / running / done / failed / needs_review']
+  input_hash text
+  output_summary text
+  started_at timestamp
+  finished_at timestamp
+}
+
+Table merge_candidates [headercolor: #175e7a] {
+  merge_candidate_id uuid [pk, not null, unique]
+  item_type text [not null, note: 'entity / article / thesis / fragment']
+  left_item_id uuid [not null]
+  right_item_id uuid [not null]
+  similarity_score numeric
+  conflict_summary text
+  proposed_action text [note: 'merge / keep_separate / mark_conflict / archive_one']
+  status text [not null, default: 'pending', note: 'pending / approved / rejected / applied']
+  created_at timestamp [not null]
+}
+
+Table background_jobs [headercolor: #175e7a] {
+  job_id uuid [pk, not null, unique]
+  job_type text [not null, note: 'dedup / merge / conflict_scan / rebuild_index / refresh_articles']
+  status text [not null, default: 'queued']
+  priority integer [default: 5]
+  scheduled_at timestamp
+  started_at timestamp
+  finished_at timestamp
+  payload jsonb
+  result_summary text
+}
+
+Ref: entity_aliases.entity_id > entities.entity_id
+Ref: person_profiles.entity_id - entities.entity_id
+Ref: organization_profiles.entity_id - entities.entity_id
+Ref: book_profiles.entity_id - entities.entity_id
+Ref: book_profiles.author_entity_id > entities.entity_id
+Ref: period_profiles.entity_id - entities.entity_id
+Ref: event_profiles.entity_id - entities.entity_id
+Ref: event_profiles.place_entity_id > entities.entity_id
+Ref: sources.source_entity_id > entities.entity_id
+Ref: fragments.source_id > sources.source_id
+Ref: fragments.parent_fragment_id > fragments.fragment_id
+Ref: fragment_entities.fragment_id > fragments.fragment_id
+Ref: fragment_entities.entity_id > entities.entity_id
+Ref: wiki_articles.primary_entity_id > entities.entity_id
+Ref: article_fragments.article_id > wiki_articles.article_id
+Ref: article_fragments.fragment_id > fragments.fragment_id
+Ref: article_entities.article_id > wiki_articles.article_id
+Ref: article_entities.entity_id > entities.entity_id
+Ref: thesis_fragments.thesis_id > theses.thesis_id
+Ref: thesis_fragments.fragment_id > fragments.fragment_id
+Ref: article_theses.article_id > wiki_articles.article_id
+Ref: article_theses.thesis_id > theses.thesis_id
+Ref: relations.subject_entity_id > entities.entity_id
+Ref: relations.object_entity_id > entities.entity_id
+Ref: relations.relation_type_id > relation_types.relation_type_id
+Ref: relation_evidence_fragments.relation_id > relations.relation_id
+Ref: relation_evidence_fragments.fragment_id > fragments.fragment_id
+Ref: semantic_index_items.entity_id > entities.entity_id
+Ref: query_context_items.run_id > query_context_runs.run_id
+Ref: processing_runs.source_id > sources.source_id
